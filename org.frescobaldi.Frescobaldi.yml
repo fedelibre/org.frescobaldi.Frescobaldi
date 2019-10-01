@@ -68,15 +68,20 @@ modules:
 - name: python-ly
   buildsystem: simple
   build-commands:
-  - python3 setup.py install --prefix=--prefix=${FLATPAK_DEST} --root=/ # not sure about the prefix and root option
+  - python3 setup.py install --prefix=${FLATPAK_DEST}
   sources:
   - type: archive
     url: https://github.com/frescobaldi/python-ly/archive/v0.9.5.tar.gz
     sha256: 11d2eb5c0f8726d4d8b48bfd104ba30bee1d3c64915028e6710e6e239d1f4c1f
 - name: python-poppler-qt5
   buildsystem: simple
+  ensure-writable: [
+    "/lib/python3.7/site-packages/easy-install.pth",
+    "/lib/python3.7/site-packages/setuptools.pth"
+  ]
   build-commands:
-  - python3 setup.py install --prefix=--prefix=${FLATPAK_DEST} --root=${FLATPAK_DEST}/share/sip # not sure about the prefix and root option
+  - python3 setup.py build
+  - python3 setup.py install --prefix=${FLATPAK_DEST} --install-lib ${FLATPAK_DEST}/lib/python3.7/site-packages
   sources:
   - type: archive
     url: https://github.com/frescobaldi/python-poppler-qt5/archive/v0.74.0.tar.gz
@@ -84,7 +89,8 @@ modules:
 - name: lilypond
   buildsystem: simple
   build-commands:
-  - install -D lilypond-2.18.2-1.linux-64.sh /app/bin/lilypond
+  - sh lilypond-2.18.2-1.linux-64.sh --prefix ${FLATPAK_DEST}
+  - chmod 755 ${FLATPAK_DEST}/lilypond/usr/lib/libpython2.4.so.1.0
   sources:
   - type: file
     url: http://lilypond.org/download/binaries/linux-64/lilypond-2.18.2-1.linux-64.sh
