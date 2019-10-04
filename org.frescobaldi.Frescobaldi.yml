@@ -1,15 +1,18 @@
 app-id: org.frescobaldi.Frescobaldi
-runtime: org.kde.Platform # perhaps freedesktop.platform would suffice
-runtime-version: '5.12'
+runtime: org.kde.Platform
+runtime-version: '5.12' # QtWebKit, needed for documentation browser, is deprecated since 5.9. See issue #919.
 sdk: org.kde.Sdk
 command: frescobaldi
 finish-args:
   - --socket=x11
   - --share=ipc
+  - --share=network
   - --device=dri
+  - --socket=pulseaudio
   - --socket=wayland
+  - --filesystem=host
 modules:
-- name: frescobaldi # so far fresscobaldi can't import sip! changing the order of the modules could help?
+- name: frescobaldi
   buildsystem: simple
   build-commands:
   - python3 setup.py install --prefix=${FLATPAK_DEST} --root=/ # not 100% sure about the prefix and root option
