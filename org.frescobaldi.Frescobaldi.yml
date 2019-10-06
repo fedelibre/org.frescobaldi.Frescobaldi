@@ -4,12 +4,13 @@ runtime-version: '5.12' # QtWebKit, needed for documentation browser, is depreca
 sdk: org.kde.Sdk
 command: frescobaldi
 finish-args:
-  - --socket=x11
   - --share=ipc
   - --share=network
   - --device=dri
   - --socket=pulseaudio
   - --socket=wayland
+  - --socket=x11
+  - --filesystem=home
   - --filesystem=host
 modules:
 - name: frescobaldi
