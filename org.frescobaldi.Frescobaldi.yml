@@ -93,9 +93,9 @@ modules:
 - name: lilypond
   buildsystem: simple
   build-commands:
-  - sh lilypond-2.18.2-1.linux-64.sh --prefix ${FLATPAK_DEST}
+  - sh lilypond-2.19.83-1.linux-64.sh --prefix ${FLATPAK_DEST}
   - chmod 755 ${FLATPAK_DEST}/lilypond/usr/lib/libpython2.4.so.1.0
   sources:
   - type: file
-    url: http://lilypond.org/download/binaries/linux-64/lilypond-2.18.2-1.linux-64.sh
-    sha256: 4132d13f700f18bd5759837ebe1a44c2bb24205ddf145c920df050b06f8b3d22
+    url: http://lilypond.org/download/binaries/linux-64/lilypond-2.19.83-1.linux-64.sh
+    sha256: 5c109d578179e7247cff69caa43c7fba745265200f0ad1b890eb735f942cafdf
