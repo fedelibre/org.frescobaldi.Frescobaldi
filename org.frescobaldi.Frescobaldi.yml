@@ -1,11 +1,17 @@
+---
 app-id: org.frescobaldi.Frescobaldi
-rename-icon: frescobaldi
-rename-desktop-file: frescobaldi.desktop
-desktop-file-name-suffix: " (Devel)"
+
 runtime: org.kde.Platform
-runtime-version: '5.12' # QtWebKit, needed for documentation browser, is deprecated since 5.9. See issue #919.
+# Documentation browser currently requires QtWebKit, deprecated since Qt 5.9.
+# Frescobaldi should use QtWebEngineWidgets, see issue #919.
+runtime-version: '5.12'
 sdk: org.kde.Sdk
+
 command: frescobaldi
+rename-desktop-file: frescobaldi.desktop
+rename-icon: frescobaldi
+desktop-file-name-suffix: " (Devel)"
+
 finish-args:
   - --share=ipc
   - --share=network
@@ -13,17 +19,18 @@ finish-args:
   - --socket=pulseaudio
   - --socket=wayland
   - --socket=x11
-  - --filesystem=home
   - --filesystem=host
+
 modules:
 - name: frescobaldi
   buildsystem: simple
   build-commands:
-  - python3 setup.py install --prefix=${FLATPAK_DEST} --root=/ # not 100% sure about the prefix and root option
+  - python3 setup.py install --prefix=${FLATPAK_DEST} --root=/
   sources:
   - type: git
     url: https://github.com/frescobaldi/frescobaldi
-- name: openjpeg # copy/pasted
+
+- name: openjpeg
   buildsystem: cmake-ninja
   config-opts:
     - -DBUILD_CODEC=OFF
@@ -33,7 +40,8 @@ modules:
   - type: archive
     url: https://github.com/uclouvain/openjpeg/archive/v2.3.0.tar.gz
     sha256: 3dc787c1bb6023ba846c2a0d9b1f6e179f1cd255172bde9eb75b01f1e6c7d71a
-- name: poppler # copy/pasted
+
+- name: poppler
   buildsystem: cmake-ninja
   config-opts:
     - -DCMAKE_INSTALL_LIBDIR=/app/lib
@@ -44,7 +52,8 @@ modules:
   - type: archive
     url: https://poppler.freedesktop.org/poppler-0.80.0.tar.xz
     sha256: 4d3ca6b79bc13b8e24092e34f83ef5f387f3bb0bbd7359a6c078e09c696d104f
-- name: pyqt5 # copy/pasted
+
+- name: pyqt5
   config-opts:
     - --disable-static
     - --enable-x11
@@ -59,7 +68,7 @@ modules:
       --sip=/app/bin/sip --sip-incdir=/app/include QMAKE_CFLAGS_RELEASE='-I/usr/include/python3.7m/'  QMAKE_CXXFLAGS_RELEASE='-I/usr/include/python3.7m/'
     dest-filename: configure
   modules:
-  - name: sip # copy/pasted
+  - name: sip
     sources:
     - type: archive
       url: https://www.riverbankcomputing.com/static/Downloads/sip/4.19.19/sip-4.19.19.tar.gz
@@ -72,6 +81,7 @@ modules:
     cleanup:
       - /bin
       - /include
+
 - name: python-ly
   buildsystem: simple
   build-commands:
@@ -80,6 +90,7 @@ modules:
   - type: archive
     url: https://github.com/frescobaldi/python-ly/archive/v0.9.5.tar.gz
     sha256: 11d2eb5c0f8726d4d8b48bfd104ba30bee1d3c64915028e6710e6e239d1f4c1f
+
 - name: python-poppler-qt5
   buildsystem: simple
   ensure-writable: [
@@ -93,6 +104,7 @@ modules:
   - type: archive
     url: https://github.com/frescobaldi/python-poppler-qt5/archive/v0.74.0.tar.gz
     sha256: 8e073ec496a1c39bbe14b53d70c0a8628b7ec3fe0f8db0709440a6a6b553109f
+
 - name: lilypond
   buildsystem: simple
   build-commands:
