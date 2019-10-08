@@ -1,4 +1,7 @@
 app-id: org.frescobaldi.Frescobaldi
+rename-icon: frescobaldi
+rename-desktop-file: frescobaldi.desktop
+desktop-file-name-suffix: " (Devel)"
 runtime: org.kde.Platform
 runtime-version: '5.12' # QtWebKit, needed for documentation browser, is deprecated since 5.9. See issue #919.
 sdk: org.kde.Sdk
