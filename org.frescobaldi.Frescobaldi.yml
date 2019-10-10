@@ -28,7 +28,8 @@ modules:
   - python3 setup.py install --prefix=${FLATPAK_DEST} --root=/
   sources:
   - type: git
-    url: https://github.com/frescobaldi/frescobaldi
+    url: https://github.com/fedelibre/frescobaldi
+    branch: 879/appdata
 
 - name: openjpeg
   buildsystem: cmake-ninja
