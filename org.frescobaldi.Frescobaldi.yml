@@ -1,10 +1,10 @@
 ---
 app-id: org.frescobaldi.Frescobaldi
 
-runtime: org.kde.Platform
 # Documentation browser currently requires QtWebKit, deprecated since Qt 5.9.
 # Frescobaldi should use QtWebEngineWidgets, see issue #919.
-runtime-version: '5.12'
+runtime: org.kde.Platform
+runtime-version: '5.13'
 sdk: org.kde.Sdk
 
 command: frescobaldi
@@ -15,22 +15,14 @@ desktop-file-name-suffix: " (Devel)"
 finish-args:
   - --share=ipc
   - --share=network
-  - --device=dri
+  - --device=all
   - --socket=pulseaudio
   - --socket=wayland
   - --socket=x11
+  - --env=QT_QPA_PLATFORM=xcb
   - --filesystem=host
 
 modules:
-- name: frescobaldi
-  buildsystem: simple
-  build-commands:
-  - python3 setup.py install --prefix=${FLATPAK_DEST} --root=/
-  sources:
-  - type: git
-    url: https://github.com/fedelibre/frescobaldi
-    branch: 879/appdata
-
 - name: openjpeg
   buildsystem: cmake-ninja
   config-opts:
@@ -106,6 +98,25 @@ modules:
     url: https://github.com/frescobaldi/python-poppler-qt5/archive/v0.74.0.tar.gz
     sha256: 8e073ec496a1c39bbe14b53d70c0a8628b7ec3fe0f8db0709440a6a6b553109f
 
+- name: portmidi
+  buildsystem: cmake-ninja
+  config-opts:
+    - -DCMAKE_LIBRARY_OUTPUT_DIRECTORY=/app/lib
+    - -DCMAKE_ARCHIVE_OUTPUT_DIRECTORY=/app/lib
+    - -DCMAKE_RUNTIME_OUTPUT_DIRECTORY=/app/bin
+  sources:
+    - type: archive
+      url: https://sourceforge.net/projects/portmedia/files/portmidi/217/portmidi-src-217.zip
+      sha256: 08e9a892bd80bdb1115213fb72dc29a7bf2ff108b378180586aa65f3cfd42e0f
+    - type: patch
+      path: portmidi-no-java.patch
+  cleanup:
+    - /bin
+    - /lib/pkgconfig
+    - /include
+    - '*.a'
+    - '*.la'
+
 - name: lilypond
   buildsystem: simple
   build-commands:
@@ -115,3 +126,12 @@ modules:
   - type: file
     url: http://lilypond.org/download/binaries/linux-64/lilypond-2.19.83-1.linux-64.sh
     sha256: 5c109d578179e7247cff69caa43c7fba745265200f0ad1b890eb735f942cafdf
+
+- name: frescobaldi
+  buildsystem: simple
+  build-commands:
+    - python3 setup.py install --prefix=${FLATPAK_DEST} --root=/
+  sources:
+    - type: git
+      url: https://github.com/fedelibre/frescobaldi
+      branch: 879/appdata
