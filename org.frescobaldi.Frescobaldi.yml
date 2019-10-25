@@ -133,8 +133,15 @@ modules:
     - python3 setup.py install --prefix=${FLATPAK_DEST} --root=/
   sources:
     - type: git
-      url: https://github.com/fedelibre/frescobaldi
-      branch: 879/appdata
-  post-install:
-    - mv /app/share/metainfo/frescobaldi.appdata.xml /app/share/metainfo/org.frescobaldi.Frescobaldi.xml
-    - sed -i 's|<id>frescobaldi</id>|<id>org.frescobaldi.Frescobaldi</id>|' /app/share/metainfo/org.frescobaldi.Frescobaldi.xml
+      url: https://github.com/frescobaldi/frescobaldi
+      branch: master
+
+- name: appdata
+  buildsystem: simple
+  build-commands:
+    - mkdir -p ${FLATPAK_DEST}/share/metainfo
+    - cp org.frescobaldi.Frescobaldi.appdata.xml ${FLATPAK_DEST}/share/metainfo
+    - appstream-compose --basename=org.frescobaldi.Frescobaldi --prefix=${FLATPAK_DEST} --origin=flatpak org.frescobaldi.Frescobaldi
+  sources:
+  - type: file
+    path: org.frescobaldi.Frescobaldi.appdata.xml
