@@ -46,6 +46,25 @@ modules:
     url: https://poppler.freedesktop.org/poppler-0.80.0.tar.xz
     sha256: 4d3ca6b79bc13b8e24092e34f83ef5f387f3bb0bbd7359a6c078e09c696d104f
 
+- name: sip
+  buildsystem: simple
+  build-commands:
+    - python3 configure.py
+      --bindir=${FLATPAK_DEST}/bin
+      --destdir=${FLATPAK_DEST}/lib/python3.7/site-packages
+      --incdir=${FLATPAK_DEST}/include
+      --sipdir=${FLATPAK_DEST}/share/sip
+      --stubsdir=${FLATPAK_DEST}/lib/python3.7/site-packages
+      --sip-module=PyQt5.sip
+    - make -j $FLATPAK_BUILDER_N_JOBS
+    - make install
+  sources:
+  - type: archive
+    url: https://www.riverbankcomputing.com/static/Downloads/sip/4.19.19/sip-4.19.19.tar.gz
+    sha256: 5436b61a78f48c7e8078e93a6b59453ad33780f80c644e5f3af39f94be1ede44
+  cleanup:
+    - /bin
+
 - name: pyqt5
   config-opts:
     - --disable-static
@@ -60,20 +79,6 @@ modules:
       --no-qml-plugin --sysroot=/app --qsci-api --qsci-api-destdir=/app/qsci --sipdir=/app/share/sip
       --sip=/app/bin/sip --sip-incdir=/app/include QMAKE_CFLAGS_RELEASE='-I/usr/include/python3.7m/'  QMAKE_CXXFLAGS_RELEASE='-I/usr/include/python3.7m/'
     dest-filename: configure
-  modules:
-  - name: sip
-    sources:
-    - type: archive
-      url: https://www.riverbankcomputing.com/static/Downloads/sip/4.19.19/sip-4.19.19.tar.gz
-      sha256: 5436b61a78f48c7e8078e93a6b59453ad33780f80c644e5f3af39f94be1ede44
-    - type: script
-      commands:
-      - python3 configure.py --sip-module PyQt5.sip -b ${FLATPAK_DEST}/bin -d ${FLATPAK_DEST}/lib/python3.7/site-packages
-        -e ${FLATPAK_DEST}/include -v ${FLATPAK_DEST}/share/sip --stubsdir=${FLATPAK_DEST}/lib/python3.7/site-packages
-      dest-filename: configure
-    cleanup:
-      - /bin
-      - /include
 
 - name: python-ly
   buildsystem: simple
