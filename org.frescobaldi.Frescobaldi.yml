@@ -140,6 +140,8 @@ modules:
     - type: archive
       url: https://github.com/frescobaldi/frescobaldi/releases/download/v3.0.0/frescobaldi-3.0.0.tar.gz
       sha256: 5fa8e4e356cd7f0fb7b8e83870914423e7fec45fa6e0f8243d7946b9e4829895
+    - type: patch
+      path: sip-fix.patch
 
 - name: appdata
   buildsystem: simple
