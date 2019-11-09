@@ -92,12 +92,13 @@ modules:
 - name: python-poppler-qt5
   buildsystem: simple
   ensure-writable: [
-    "/lib/python3.7/site-packages/easy-install.pth",
-    "/lib/python3.7/site-packages/setuptools.pth"
+    "easy-install.pth"
   ]
   build-commands:
   - python3 setup.py build
-  - python3 setup.py install --prefix=${FLATPAK_DEST} --install-lib ${FLATPAK_DEST}/lib/python3.7/site-packages
+  - python3 setup.py install
+    --prefix=${FLATPAK_DEST}
+    --install-lib=${FLATPAK_DEST}/lib/python3.7/site-packages
   sources:
   - type: archive
     url: https://github.com/frescobaldi/python-poppler-qt5/archive/v0.74.0.tar.gz
