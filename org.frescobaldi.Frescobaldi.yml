@@ -23,6 +23,7 @@ finish-args:
   - --filesystem=host
 
 modules:
+# OpenJPEG is needed to build Poppler
 - name: openjpeg
   buildsystem: cmake-ninja
   config-opts:
