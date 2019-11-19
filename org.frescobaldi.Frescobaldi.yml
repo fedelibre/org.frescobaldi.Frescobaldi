@@ -50,11 +50,11 @@ modules:
   buildsystem: simple
   build-commands:
     - python3 configure.py
-      --bindir=${FLATPAK_DEST}/bin
-      --destdir=${FLATPAK_DEST}/lib/python3.7/site-packages
-      --incdir=${FLATPAK_DEST}/include
-      --sipdir=${FLATPAK_DEST}/share/sip
-      --stubsdir=${FLATPAK_DEST}/lib/python3.7/site-packages
+      --bindir=/app/bin
+      --destdir=/app/lib/python3.7/site-packages
+      --incdir=/app/include
+      --sipdir=/app/share/sip
+      --stubsdir=/app/lib/python3.7/site-packages
       --sip-module=PyQt5.sip
     - make -j $FLATPAK_BUILDER_N_JOBS
     - make install
@@ -83,7 +83,7 @@ modules:
 - name: python-ly
   buildsystem: simple
   build-commands:
-  - python3 setup.py install --prefix=${FLATPAK_DEST}
+  - python3 setup.py install --prefix=/app
   sources:
   - type: archive
     url: https://github.com/frescobaldi/python-ly/archive/v0.9.5.tar.gz
@@ -97,8 +97,8 @@ modules:
   build-commands:
   - python3 setup.py build
   - python3 setup.py install
-    --prefix=${FLATPAK_DEST}
-    --install-lib=${FLATPAK_DEST}/lib/python3.7/site-packages
+    --prefix=/app
+    --install-lib=/app/lib/python3.7/site-packages
   sources:
   - type: archive
     url: https://github.com/frescobaldi/python-poppler-qt5/archive/v0.74.0.tar.gz
@@ -126,8 +126,8 @@ modules:
 - name: lilypond
   buildsystem: simple
   build-commands:
-  - sh lilypond-2.19.83-1.linux-64.sh --prefix ${FLATPAK_DEST}
-  - chmod 755 ${FLATPAK_DEST}/lilypond/usr/lib/libpython2.4.so.1.0
+  - sh lilypond-2.19.83-1.linux-64.sh --prefix /app
+  - chmod 755 /app/lilypond/usr/lib/libpython2.4.so.1.0
   sources:
   - type: file
     url: http://lilypond.org/download/binaries/linux-64/lilypond-2.19.83-1.linux-64.sh
@@ -136,7 +136,7 @@ modules:
 - name: frescobaldi
   buildsystem: simple
   build-commands:
-    - python3 setup.py install --prefix=${FLATPAK_DEST} --root=/
+    - python3 setup.py install --prefix=/app --root=/
   sources:
     - type: archive
       url: https://github.com/frescobaldi/frescobaldi/releases/download/v3.0.0/frescobaldi-3.0.0.tar.gz
@@ -147,8 +147,8 @@ modules:
 - name: appdata
   buildsystem: simple
   build-commands:
-    - mkdir -p ${FLATPAK_DEST}/share/metainfo
-    - cp org.frescobaldi.Frescobaldi.appdata.xml ${FLATPAK_DEST}/share/metainfo
+    - mkdir -p /app/share/metainfo
+    - cp org.frescobaldi.Frescobaldi.appdata.xml /app/share/metainfo
   sources:
   - type: file
     path: org.frescobaldi.Frescobaldi.appdata.xml
