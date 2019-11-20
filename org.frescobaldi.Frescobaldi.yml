@@ -116,7 +116,7 @@ modules:
       url: https://sourceforge.net/projects/portmedia/files/portmidi/217/portmidi-src-217.zip
       sha256: 08e9a892bd80bdb1115213fb72dc29a7bf2ff108b378180586aa65f3cfd42e0f
     - type: patch
-      path: portmidi-no-java.patch
+      path: patches/portmidi-no-java.patch
   cleanup:
     - /bin
     - /lib/pkgconfig
@@ -143,7 +143,7 @@ modules:
       url: https://github.com/frescobaldi/frescobaldi/releases/download/v3.0.0/frescobaldi-3.0.0.tar.gz
       sha256: 5fa8e4e356cd7f0fb7b8e83870914423e7fec45fa6e0f8243d7946b9e4829895
     - type: patch
-      path: sip-fix.patch
+      path: patches/sip-fix.patch
 
 - name: appdata
   buildsystem: simple
