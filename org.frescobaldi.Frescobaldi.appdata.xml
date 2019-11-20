@@ -50,4 +50,30 @@
 
   <url type="homepage">http://frescobaldi.org/</url>
 
+  <launchable type="desktop-id">org.frescobaldi.Frescobaldi.desktop</launchable>
+
+  <translation type="gettext">frescobaldi</translation>
+
+  <releases>
+    <release version="3.0.0" date="2017-02-17">
+      <description>
+        <p>Requirement changes:</p>
+        <ul>
+          <li>Frescobaldi now requires Python3.2+, Qt5, PyQt5, python-poppler-qt5</li>
+        </ul>
+        <p>New features:</p>
+        <ul>
+          <li>Zoom with pinch gesture in Music View, contributed by David Rydh.</li>
+          <li>An option (enabled by default) to move the cursor to the end of the line when PageDown is pressed on the last line, and to move the cursor to the start of the first line if PageUp is pressed on the first line.</li>
+        </ul>
+        <p>Improvements:</p>
+        <ul>
+          <li>Retina display support in Music View, contributed by David Rydh</li>
+        </ul>
+      </description>
+    </release>
+  </releases>
+
+  <content_rating type="oars-1.1" />
+
 </component>
