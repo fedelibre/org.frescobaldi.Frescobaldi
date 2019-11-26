@@ -35,16 +35,28 @@
 
   <screenshots>
     <screenshot type="default">
-      <caption>Main editor view with PDF preview</caption>
-      <image>http://frescobaldi.org/images/frescobaldi1-en.png</image>
+      <caption>Text editor and music view with two-way Point &amp; Click</caption>
+      <image>https://user-images.githubusercontent.com/1644647/69150986-10d89880-0ada-11ea-8e40-ed3f7a1ea00b.png</image>
     </screenshot>
     <screenshot>
-      <caption>Magnifier glass</caption>
-      <image>http://frescobaldi.org/images/magnifier1-small-en.png</image>
+      <caption>Change the input without leaving the music view</caption>
+      <image>https://user-images.githubusercontent.com/1644647/69151435-efc47780-0ada-11ea-917b-580abf4e8a99.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>Zoom with the magnifier glass</caption>
+      <image>https://user-images.githubusercontent.com/1644647/69188369-b280d980-0b1c-11ea-8f0e-e20b0f9f463d.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>Powerful text editor with syntax highlighting and automatic completion</caption>
+      <image>https://user-images.githubusercontent.com/1644647/69151460-f7841c00-0ada-11ea-9577-1d2d358770ef.png</image>
     </screenshot>
     <screenshot>
       <caption>Snippet manager and editor</caption>
-      <image>http://frescobaldi.org/images/snippet2-small-en.png</image>
+      <image>https://user-images.githubusercontent.com/1644647/69151482-023eb100-0adb-11ea-9221-191052d5c92d.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>Score Wizard to quickly setup a music score</caption>
+      <image>https://user-images.githubusercontent.com/1644647/69151502-08cd2880-0adb-11ea-9c17-92886ef0a846.png</image>
     </screenshot>
   </screenshots>
 
