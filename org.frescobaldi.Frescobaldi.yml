@@ -124,6 +124,16 @@ modules:
     - '*.a'
     - '*.la'
 
+- name: lilypond
+  buildsystem: simple
+  build-commands:
+  - sh lilypond-2.19.83-1.linux-64.sh --prefix /app
+  - chmod 755 /app/lilypond/usr/lib/libpython2.4.so.1.0
+  sources:
+  - type: file
+    url: http://lilypond.org/download/binaries/linux-64/lilypond-2.19.83-1.linux-64.sh
+    sha256: 5c109d578179e7247cff69caa43c7fba745265200f0ad1b890eb735f942cafdf
+
 - name: frescobaldi
   buildsystem: simple
   build-commands:
